@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Fira Code', Consolas, monospace;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-bg: #070b0e;
+  --color-surface: #0d1117;
+  --color-surface2: #161b22;
+  --color-border: #21262d;
+  --color-borderhover: #30363d;
+  --color-text: #8b949e;
+  --color-heading: #e6edf3;
+  --color-accent: #3fb950;
+  --color-cyan: #79c0ff;
+  --color-gold: #e3b341;
+  --color-bronze: #b08060;
+  --color-muted: #484f58;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(63, 185, 80, 0.25);
+  color: var(--color-heading);
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+
+/* ── Animations ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out both; }
+.animate-fade-in    { animation: fadeIn  0.5s ease-out both; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* ── Cursor ── */
+.cursor::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+  color: var(--color-accent);
+}
+
+/* ── Grid background ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(63, 185, 80, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 185, 80, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Glow effects ── */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(63, 185, 80, 0.15), 0 0 40px rgba(63, 185, 80, 0.05);
+}
+.glow-accent:hover {
+  box-shadow: 0 0 25px rgba(63, 185, 80, 0.25), 0 0 50px rgba(63, 185, 80, 0.1);
+}
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(121, 192, 255, 0.15);
+}
+
+/* ── Section divider ── */
+.section-line {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
+/* ── Glitch effect ── */
+@keyframes glitch-1 {
+  0%, 100% { clip-path: inset(0 0 95% 0); transform: translate(-3px,  1px); }
+  25%       { clip-path: inset(30% 0 50% 0); transform: translate( 3px, -1px); }
+  50%       { clip-path: inset(60% 0 20% 0); transform: translate(-2px,  2px); }
+  75%       { clip-path: inset(80% 0  5% 0); transform: translate( 2px, -2px); }
+}
+@keyframes glitch-2 {
+  0%, 100% { clip-path: inset(80% 0  5% 0); transform: translate( 3px, -1px); }
+  25%       { clip-path: inset(50% 0 30% 0); transform: translate(-3px,  2px); }
+  50%       { clip-path: inset(20% 0 60% 0); transform: translate( 2px, -1px); }
+  75%       { clip-path: inset( 5% 0 80% 0); transform: translate(-2px,  1px); }
+}
+
+/* ── Photo scan line ── */
+@keyframes scanline {
+  0%   { top: -4px; opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(63,185,80,0.8), transparent);
+  animation: scanline 2.8s linear infinite;
+  pointer-events: none;
+}
+
+/* ── Corner brackets ── */
+.corner-bracket::before,
+.corner-bracket::after,
+.corner-bracket > span::before,
+.corner-bracket > span::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--color-accent);
+  border-style: solid;
+}
+.corner-bracket::before  { top: 0;    left: 0;  border-width: 2px 0 0 2px; }
+.corner-bracket::after   { top: 0;    right: 0; border-width: 2px 2px 0 0; }
+.corner-bracket > span::before { bottom: 0; left: 0;  border-width: 0 0 2px 2px; }
+.corner-bracket > span::after  { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
