@@ -9,7 +9,7 @@ interface Props {
 export default function TerminalWindow({ title, children, className = '' }: Props) {
   return (
     <div
-      className={`rounded-lg overflow-hidden border border-border ${className}`}
+      className={`rounded-lg overflow-hidden border border-border bg-bg/80 ${className}`}
       style={{ boxShadow: '0 0 0 1px rgba(63,185,80,0.06), 0 16px 40px rgba(0,0,0,0.4)' }}
     >
       {/* Chrome */}
