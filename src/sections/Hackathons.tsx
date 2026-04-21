@@ -23,7 +23,7 @@ function WinCard({ win, index }: { win: HackathonWin; index: number }) {
       transition={{ duration: 0.45, delay: index * 0.12 }}
       whileHover={{ y: -3 }}
     >
-      <TerminalWindow title={`sk@portfolio · ./missions/${win.event.toLowerCase().replace(/\s+/g, '-')}`} className="h-full">
+      <TerminalWindow title={`sk@portfolio · ./missions/${win.event.toLowerCase().replace(/\s+/g, '-')}`}>
         <div className="px-5 py-4 flex flex-col gap-3" style={{ boxShadow: `inset 0 0 40px ${s.glow}` }}>
           <p className="font-mono text-xs text-muted">
             <span className="text-accent">$</span> <span className="text-heading">cat</span> <span className="text-cyan">mission_brief.txt</span>
@@ -60,9 +60,6 @@ function WinCard({ win, index }: { win: HackathonWin; index: number }) {
                 <span key={tag} className="font-mono text-[11px] px-2 py-0.5 bg-surface2 border border-border text-muted rounded">{tag}</span>
               ))}
             </div>
-          </div>
-          <div className="flex items-center gap-2 font-mono text-xs text-accent mt-1">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />{h.successLbl}
           </div>
         </div>
       </TerminalWindow>

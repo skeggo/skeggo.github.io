@@ -279,7 +279,7 @@ export default function Contact() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
         >
           <span className="font-mono text-xs text-muted">
-            <span className="text-accent">Seif eddine Koubaa</span> · {new Date().getFullYear()}
+            <span className="text-accent">Seif eddine Koubaa</span>
           </span>
         </motion.div>
       </div>

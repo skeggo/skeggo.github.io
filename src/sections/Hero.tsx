@@ -133,7 +133,7 @@ export default function Hero() {
                   style={{ background: 'linear-gradient(180deg, rgba(63,185,80,0.05) 0%, transparent 50%, rgba(63,185,80,0.08) 100%)' }} />
               </div>
             </div>
-            <span className="absolute -top-1 -right-1 font-mono text-[10px] text-accent/60 bg-bg border border-accent/20 px-1.5 py-0.5 rounded">ID:SK_2026</span>
+            <span className="absolute -top-1 -right-1 font-mono text-[10px] text-accent/60 bg-bg border border-accent/20 px-1.5 py-0.5 rounded">ID:SK.dev</span>
             <span className="absolute -bottom-1 -left-1 font-mono text-[10px] text-muted bg-bg border border-border px-1.5 py-0.5 rounded">0x4B4F55424141</span>
           </div>
 
