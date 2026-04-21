@@ -2,114 +2,82 @@ import { motion } from 'framer-motion'
 import { projects, type Project } from '../data'
 import MatrixRain from '../components/MatrixRain'
 import TerminalWindow from '../components/TerminalWindow'
+import { useTranslation } from '../contexts/LanguageContext'
 
 const placeColors: Record<string, string> = {
   '1st': 'text-gold  border-gold/40  bg-gold/10',
   '2nd': 'text-cyan  border-cyan/40  bg-cyan/10',
   '3rd': 'text-bronze border-bronze/40 bg-bronze/10',
 }
-const placeLabel: Record<string, string> = {
-  '1st': '🥇 1ST PLACE',
-  '2nd': '🥈 2ND PLACE',
-  '3rd': '🥉 3RD PLACE',
-}
 
-const GitHubIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-  </svg>
-)
-const ExternalIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
-  </svg>
-)
+const GitHubIcon   = () => <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+const ExternalIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const { t } = useTranslation()
+  const p = t.projects
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.45, delay: (index % 2) * 0.12 }}
       whileHover={{ y: -4 }}
     >
       <TerminalWindow title={`sk@portfolio · ./projects/${project.id}`} className="h-full">
         <div className="px-5 py-4 flex flex-col gap-3 h-full">
-
-          {/* Command */}
           <p className="font-mono text-xs text-muted">
-            <span className="text-accent">$</span>{' '}
-            <span className="text-heading">cat</span>{' '}
-            <span className="text-cyan">README.md</span>
+            <span className="text-accent">$</span> <span className="text-heading">cat</span> <span className="text-cyan">README.md</span>
           </p>
 
-          {/* Hackathon badge + date row */}
           <div className="flex items-center justify-between gap-2">
             {project.hackathon ? (
               <span className={`font-mono text-[11px] font-semibold px-2 py-0.5 rounded border ${placeColors[project.hackathon.place]}`}>
-                {placeLabel[project.hackathon.place]}
+                {project.hackathon.place === '1st' ? '🥇' : project.hackathon.place === '3rd' ? '🥉' : '🥈'} {p.catCmd === '$ cat README.md' ? `${project.hackathon.place.toUpperCase()} PLACE` : `${project.hackathon.place === '1st' ? '1ÈRE' : '3ÈME'} PLACE`}
               </span>
             ) : (
-              <span className="font-mono text-[11px] px-2 py-0.5 rounded border border-border text-muted">
-                PERSONAL PROJECT
-              </span>
+              <span className="font-mono text-[11px] px-2 py-0.5 rounded border border-border text-muted">{p.personalBadge}</span>
             )}
             <span className="font-mono text-xs text-muted shrink-0">{project.date}</span>
           </div>
 
           <div className="border-t border-border" />
 
-          {/* Title */}
           <div>
             <h3 className="font-mono text-base font-bold text-heading">{project.title}</h3>
-            <p className="font-mono text-xs text-accent mt-0.5">
-              <span className="text-muted">//</span> {project.subtitle}
-            </p>
+            <p className="font-mono text-xs text-accent mt-0.5"><span className="text-muted">//</span> {project.subtitle}</p>
           </div>
 
-          {/* Description */}
           <p className="text-sm text-text leading-relaxed flex-1">{project.description}</p>
 
-          {/* Hackathon org */}
           {project.hackathon && (
             <p className="font-mono text-xs text-muted italic">{project.hackathon.org}</p>
           )}
 
-          {/* Stack */}
           <div>
             <p className="font-mono text-[11px] text-muted mb-2">
-              <span className="text-accent">STACK</span> ──────────────────
+              <span className="text-accent">{p.stackLabel}</span> ──────────────────
             </p>
             <div className="flex flex-wrap gap-1.5">
               {project.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="font-mono text-[11px] px-2 py-0.5 bg-surface2 border border-border text-muted rounded hover:border-accent/50 hover:text-accent transition-colors"
-                >
+                <span key={tag} className="font-mono text-[11px] px-2 py-0.5 bg-surface2 border border-border text-muted rounded hover:border-accent/50 hover:text-accent transition-colors">
                   --{tag}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Links */}
           {(project.github || project.live) && (
             <div className="flex gap-2 pt-2 border-t border-border">
               {project.github && (
                 <a href={project.github} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 bg-surface2 border border-border text-muted rounded hover:border-accent hover:text-accent transition-all"
-                >
-                  <GitHubIcon /> Source
-                </a>
+                ><GitHubIcon /> {p.sourceBtn}</a>
               )}
               {project.live && (
                 <a href={project.live} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 bg-surface2 border border-border text-muted rounded hover:border-cyan hover:text-cyan transition-all"
-                >
-                  <ExternalIcon /> Live Demo
-                </a>
+                ><ExternalIcon /> {p.demoBtn}</a>
               )}
             </div>
           )}
@@ -120,30 +88,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Projects() {
+  const { t } = useTranslation()
+  const p = t.projects
+
   return (
     <section id="projects" className="relative overflow-hidden py-24 px-6">
       <MatrixRain opacity={0.03} />
-
       <div className="relative max-w-5xl mx-auto">
-        {/* Section header */}
         <motion.div className="mb-12"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.4 }}
         >
           <p className="font-mono text-xs text-muted mb-1">
-            <span className="text-accent">$</span> cd ./projects &amp;&amp; ls -la
+            <span className="text-accent">$</span> {p.cmd.slice(2)}
           </p>
-          <h2 className="font-mono text-3xl font-bold text-heading">Selected Work</h2>
+          <h2 className="font-mono text-3xl font-bold text-heading">{p.title}</h2>
           <div className="section-line mt-3" />
           <p className="font-mono text-xs text-muted mt-3">
-            <span className="text-accent">{projects.length}</span> entries found
+            <span className="text-accent">{projects.length}</span> {p.entriesFound}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
-          ))}
+          {projects.map((project, i) => <ProjectCard key={project.id} project={project} index={i} />)}
         </div>
       </div>
     </section>
