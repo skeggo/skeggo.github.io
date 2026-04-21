@@ -12,7 +12,7 @@ const placeStyle: Record<string, { badge: string; border: string; glow: string }
 const trophy: Record<string, string> = { '1st': '🏆', '2nd': '🥈', '3rd': '🥉' }
 
 function WinCard({ win, index }: { win: HackathonWin; index: number }) {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   const h = t.hackathons
   const s = placeStyle[win.place]
 
@@ -51,7 +51,7 @@ function WinCard({ win, index }: { win: HackathonWin; index: number }) {
           <div className="border-t border-border" />
           <div>
             <p className="font-mono text-[11px] text-muted mb-2"><span className="text-accent">&gt;</span> {h.summaryLbl.slice(2)}</p>
-            <p className="text-sm text-text leading-relaxed">{win.description}</p>
+            <p className="text-sm text-text leading-relaxed">{lang === 'fr' ? win.descriptionFr : win.description}</p>
           </div>
           <div>
             <p className="font-mono text-[11px] text-muted mb-2"><span className="text-accent">{h.toolsLbl}</span> ──────────</p>

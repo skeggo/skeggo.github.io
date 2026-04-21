@@ -14,7 +14,7 @@ const GitHubIcon   = () => <svg viewBox="0 0 24 24" fill="currentColor" classNam
 const ExternalIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   const p = t.projects
 
   return (
@@ -45,10 +45,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
           <div>
             <h3 className="font-mono text-base font-bold text-heading">{project.title}</h3>
-            <p className="font-mono text-xs text-accent mt-0.5"><span className="text-muted">//</span> {project.subtitle}</p>
+            <p className="font-mono text-xs text-accent mt-0.5"><span className="text-muted">//</span> {lang === 'fr' ? project.subtitleFr : project.subtitle}</p>
           </div>
 
-          <p className="text-sm text-text leading-relaxed flex-1">{project.description}</p>
+          <p className="text-sm text-text leading-relaxed flex-1">{lang === 'fr' ? project.descriptionFr : project.description}</p>
 
           {project.hackathon && (
             <p className="font-mono text-xs text-muted italic">{project.hackathon.org}</p>
