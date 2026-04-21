@@ -5,7 +5,7 @@ import MatrixRain from '../components/MatrixRain'
 import TerminalWindow from '../components/TerminalWindow'
 import { useTranslation } from '../contexts/LanguageContext'
 
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID as string
+const FORMSPREE_ID = 'mrerawgj'
 
 const endpoints = [
   {
